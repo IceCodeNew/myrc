@@ -3,12 +3,12 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 ################################################################
 
 # systemctl shortcuts
-alias start='sudo systemctl start'
-alias stop='sudo systemctl stop'
-alias restart='sudo systemctl restart'
-alias status='systemctl status'
-alias enable='sudo systemctl enable'
-alias disable='sudo systemctl disable'
+# alias start='sudo systemctl start'
+# alias stop='sudo systemctl stop'
+# alias restart='sudo systemctl restart'
+# alias status='systemctl status'
+# alias enable='sudo systemctl enable'
+# alias disable='sudo systemctl disable'
 
 # colored output
 alias dir='dir --color=auto'
@@ -52,8 +52,8 @@ EOF
 ################################################################
 
 # alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias crontab='crontab -i'
 alias ll='ls -alF'
