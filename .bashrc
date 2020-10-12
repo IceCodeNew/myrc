@@ -1,7 +1,13 @@
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-LDFLAGS="$LDFLAGS -fuse-ld=lld"
-CFLAGS="$CFLAGS -O2 -pipe -Wall -g -grecord-gcc-switches -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,-z,defs -Wl,--icf=all"
-CXXFLAGS="$CXXFLAGS -O2 -pipe -Wall -g -grecord-gcc-switches -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,-z,defs -Wl,--icf=all"
+export LDFLAGS="$LDFLAGS -fuse-ld=lld"
+if readlink -f "$(type -P cc)" | grep -qw 'gcc'; then
+  # `-Wall -fplugin=annobin` was taken out for personal preference.
+  export CFLAGS="$CFLAGS -O2 -pipe -D_FORTIFY_SOURCE=2 -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+  export CXXFLAGS="$CXXFLAGS -O2 -pipe -D_FORTIFY_SOURCE=2 -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+else
+  export CFLAGS="$CFLAGS -O2 -pipe -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+  export CXXFLAGS="$CXXFLAGS -O2 -pipe -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+fi
 
 ################################################################
 
