@@ -5,8 +5,9 @@ if readlink -f "$(type -P cc)" | grep -qw 'gcc'; then
   export CFLAGS="$CFLAGS -O2 -pipe -D_FORTIFY_SOURCE=2 -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
   export CXXFLAGS="$CXXFLAGS -O2 -pipe -D_FORTIFY_SOURCE=2 -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
 else
-  export CFLAGS="$CFLAGS -O2 -pipe -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
-  export CXXFLAGS="$CXXFLAGS -O2 -pipe -fexceptions -fstack-clash-protection -fstack-protector-strong -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+  # `-fexceptions -fstack-clash-protection -fstack-protector-strong` will come back when Clang 12 release.
+  export CFLAGS="$CFLAGS -O2 -pipe -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
+  export CXXFLAGS="$CXXFLAGS -O2 -pipe -g -grecord-gcc-switches -Wl,-z,noexecstack,-z,relro,-z,now,-z,defs -Wl,--icf=all"
 fi
 
 ################################################################
