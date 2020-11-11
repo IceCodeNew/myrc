@@ -79,13 +79,12 @@ alias pig='ps aux | grep -i'
 alias get_whatever_pw='pwgen -cnsy1 -H <(openssl rand -base64 2048)'
 alias get_easyread_pw='pwgen -Bcnsy1 -r :\`\"\\/@'"\'"' -H <(openssl rand -base64 2048)'
 alias get_easymemo_pw='pwgen -cn1 -H <(openssl rand -base64 2048)'
-# alias curl='curl --doh-url https://dns.nextdns.io/dnscrypt-proxy --false-start --http2 --tlsv1.2'
-curl() {
-  $(type -P curl) -Lq --retry 5 --retry-delay 10 --retry-max-time 60 "$@"
-}
+# alias curl="$(type -P curl) -LRq --retry 5 --retry-delay 10 --retry-max-time 60"
 # alias wget='wget2 --progress=bar --secure-protocol=PFS --https-enforce=soft'
 alias diff='diff -y --suppress-common-lines'
 alias checkinstall='checkinstall --nodoc'
+
+curl() { $(type -P curl) -LRq --retry 5 --retry-delay 10 --retry-max-time 60 "$@"; }
 
 mcd() { mkdir "$1"; cd "$1" || exit 1; }
 md5check() { md5sum "$1" | grep "$2"; }
