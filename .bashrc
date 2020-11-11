@@ -32,30 +32,33 @@ alias vdir='vdir --color=auto'
 
 ### https://gist.github.com/k4yt3x/162a7419e58a60ab774b65318179601b
 # ipa prints distilled output of the "ip a" command
-# version 1.3.0
+# version 2.1.0
 alias ip4a="ipa -4"
 alias ip6a="ipa -6"
 function ipa() {
     python3 - $@ << EOF
-import contextlib, json, subprocess, sys
+import contextlib, json, os, subprocess, sys
 e = ['ip', '-j', 'a']
 if len(sys.argv) >= 2 and sys.argv[1] in ['-4', '-6']:
     e.insert(2, sys.argv[1])
 elif len(sys.argv) >= 2:
     e.extend(['s', sys.argv[1]])
+color = True if os.getenv('COLORTERM') in ['truecolor', '24bit'] else False
 s = subprocess.Popen(e, stdout=subprocess.PIPE)
 j = s.communicate()[0]
 sys.exit(s.returncode) if s.returncode != 0 else None
 for i in json.loads(j):
     with contextlib.suppress(Exception):
-        print('{}: {}'.format(i['ifindex'], i['ifname']))
-        print('    State: {}'.format(i['operstate'])) if i.get('operstate') and i.get('operstate') != 'UNKNOWN' else None
-        print('    MAC: {}'.format(i['address'])) if i.get('address') else None
-        print('    MAC (Permanent): {}'.format(i['permaddr'])) if i.get('permaddr') else None
+        print('{}: {}{}{}'.format(i['ifindex'], '\033[36m' if color else '', i['ifname'], '\033[0m' if color else ''))
+        print('    State: {}{}{}'.format({'UP': '\033[32m', 'DOWN': '\033[31m'}.get(i['operstate'], '') if color else '',
+                                         i['operstate'], '\033[0m' if color else '')) if i.get('operstate', 'UNKNOWN') != 'UNKNOWN' else None
+        print('    MAC: {}{}{}'.format('\033[33m' if color else '', i['address'], '\033[0m' if color else '')) if i.get('address') else None
+        print('    MAC (Permanent): {}{}{}'.format('\033[33m' if color else '', i['permaddr'], '\033[0m' if color else '')) if i.get('permaddr') else None
         for a in i['addr_info']:
-            family = 'IPv4' if a['family'] == 'inet' else a['family']
-            family = 'IPv6' if a['family'] == 'inet6' else family
-            print('    {}: {}/{}'.format(family, a['local'], a['prefixlen']))
+            print('    {}: {}{}/{}{}'.format(
+                {'inet': 'IPv4', 'inet6': 'IPv6'}.get(a['family'], a['family']),
+                {'inet': '\033[35m', 'inet6': '\033[34m'}.get(a['family'], '') if color else '',
+                a['local'], a['prefixlen'], '\033[0m' if color else ''))
 EOF
 }
 
