@@ -95,9 +95,9 @@ sha512check() { sha512sum "$1" | grep "$2"; }
 
 git_clone() {
   if [[ -z "$GIT_PROXY" ]]; then
-    git clone -j$(nproc) --no-tags --shallow-submodules --recurse-submodules --depth 1 --single-branch "$@"
+    $(type -P git) clone -j "$(nproc)" --no-tags --shallow-submodules --recurse-submodules --depth 1 --single-branch "$@"
   else
-    git -c "$GIT_PROXY" clone -j$(nproc) --no-tags --shallow-submodules --recurse-submodules --depth 1 --single-branch "$@"
+    $(type -P git) -c "$GIT_PROXY" clone -j "$(nproc)" --no-tags --shallow-submodules --recurse-submodules --depth 1 --single-branch "$@"
   fi
 }
 
