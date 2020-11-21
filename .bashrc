@@ -36,7 +36,7 @@ alias vdir='vdir --color=auto'
 alias ip4a="ipa -4"
 alias ip6a="ipa -6"
 function ipa() {
-    python3 - $@ << EOF
+    python3 - "$@" << EOF
 import contextlib, json, os, subprocess, sys
 e = ['ip', '-j', 'a']
 if len(sys.argv) >= 2 and sys.argv[1] in ['-4', '-6']:
@@ -108,7 +108,7 @@ ghclone() {
     cd "$2" || exit 1
   elif [[ "$#" -eq '1' ]]; then
     git_clone "https://github.com/$1.git"
-    IFS='/' tmp_array=($1)
+    IFS='/' tmp_array=("$1")
     cd "${tmp_array[1]}" || exit 1
     unset tmp_array
   else
