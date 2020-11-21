@@ -86,7 +86,10 @@ alias checkinstall='checkinstall --nodoc'
 
 curl() { $(type -P curl) -LRq --retry 5 --retry-delay 10 --retry-max-time 60 "$@"; }
 
-mcd() { mkdir "$1"; cd "$1" || exit 1; }
+mcd() {
+  mkdir "$1"
+  cd "$1" || exit 1
+}
 md5check() { md5sum "$1" | grep "$2"; }
 sha1check() { sha1sum "$1" | grep "$2"; }
 sha256check() { sha256sum "$1" | grep "$2"; }
