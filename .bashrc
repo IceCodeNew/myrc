@@ -120,10 +120,4 @@ ghclone() {
   fi
 }
 
-extract() {
-    if [ -f "$1" ] ; then
-        bsdtar -xf "$1"
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
+extract() { [[ -f "$1" ]] && bsdtar -xf "$1" || echo "'$1' is not a valid file"; }
