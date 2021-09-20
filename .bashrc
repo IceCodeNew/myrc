@@ -68,6 +68,7 @@ EOF
 # alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias crontab='crontab -i'
+alias xargs='xargs -r -s 2000'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
