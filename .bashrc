@@ -82,7 +82,7 @@ alias get_easyread_pw='pwgen -Bcnsy1 -r :\`\"\\/@'"\'"' -H <(openssl rand -base6
 alias get_easymemo_pw='pwgen -cn1 -H <(openssl rand -base64 2048)'
 # alias curl="$(type -P curl) -LRq --retry 5 --retry-delay 10 --retry-max-time 60 -f"
 # alias wget='wget2 --progress=bar --secure-protocol=PFS --https-enforce=soft'
-alias diff='diff -y --suppress-common-lines'
+# alias diff='diff -y --suppress-common-lines'
 alias checkinstall='checkinstall --nodoc'
 
 curl() { $(type -P curl) -LRq --retry 5 --retry-delay 10 --retry-max-time 60 -f "$@"; }
