@@ -20,14 +20,18 @@ fi
 # alias disable='sudo systemctl disable'
 
 # colored output
-alias dir='dir --color=auto'
-alias egrep='egrep --color'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias grep='egrep --color'
-alias grep='grep --color=auto'
-alias ls='ls --color=auto'
-alias vdir='vdir --color=auto'
+# alias egrep='egrep --color=auto'
+# alias fgrep='fgrep --color=auto'
+# alias grep='grep --color=auto'
+# alias l.='ls -d .* --color=auto'
+# alias ll='ls -l --color=auto'
+# alias ls='ls --color=auto'
+# alias xzegrep='xzegrep --color=auto'
+# alias xzfgrep='xzfgrep --color=auto'
+# alias xzgrep='xzgrep --color=auto'
+# alias zegrep='zegrep --color=auto'
+# alias zfgrep='zfgrep --color=auto'
+# alias zgrep='zgrep --color=auto'
 
 ### https://gist.github.com/k4yt3x/162a7419e58a60ab774b65318179601b
 # ipa prints distilled output of the "ip a" command
@@ -69,9 +73,6 @@ EOF
 alias mkdir='mkdir -p'
 alias crontab='crontab -i'
 alias xargs='xargs -r -s 2000'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 alias pip3='python3 -m pip'
 
 alias hig='history | grep -i'
